@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import {TodosInterface} from "../interface/Todos.interface";
 
 @Injectable()
 export class TodosService {
@@ -19,4 +20,8 @@ export class TodosService {
         title:'todo app',
         description:'test'
     }]
+
+    addTodo(todo:TodosInterface){
+        this.todos=[...this.todos, todo]
+    }
 }
