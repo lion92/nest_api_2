@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
 import {TodosService} from "./todos.service";
 import {TodosInterface} from "../interface/Todos.interface";
 
@@ -8,19 +8,16 @@ export class TodosController {
     }
 
     @Get()
-    findAll(): TodosInterface[] {
-        return this.todos.todos;
+    async findAll(): Promise<TodosInterface[]> {
+        return await this.todos.findAll();
     }
     @Get(':id')
-    findOne(@Param('id')id):TodosInterface{
-        return this.todos.findOne(id);
+    async findOne(@Param('id') id): Promise<TodosInterface> {
+        return await this.todos.findOneBy(id);
     }
 
-
-    @Post()
-    create(@Body() newTodo:TodosInterface):void{
-        console.log(newTodo)
-       this.todos.addTodo(newTodo);
+    @Delete()
+    async remove(id: number): Promise<void> {
+        await this.todos.delete(id);
     }
-
 }
