@@ -1,10 +1,9 @@
 import {Module} from '@nestjs/common';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
-import {TodosModule} from './todos/todos.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {DataSource} from "typeorm";
-import {Todo} from "./entity/todo.entity";
+import {TodosModule} from "./todos/todos.module";
 
 @Module({
     imports: [
@@ -13,12 +12,11 @@ import {Todo} from "./entity/todo.entity";
             host: 'localhost',
             port: 3306,
             username: 'root',
-            password: 'root',
+            password: '',
             database: 'crud_nest',
-            entities: [Todo],
+            entities: ["dist/**/*.entity{.ts,.js}"],
             synchronize: true,
-        }),
-        , TodosModule],
+        }),TodosModule],
     controllers: [AppController],
     providers: [AppService],
 })

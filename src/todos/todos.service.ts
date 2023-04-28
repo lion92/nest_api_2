@@ -43,4 +43,8 @@ export class TodosService {
     async delete(id: number) {
         await this.todoRepository.delete(id);
     }
+
+    async create(todo:TodoDTO){
+        await this.todoRepository.save(todo)
+    }
 }
