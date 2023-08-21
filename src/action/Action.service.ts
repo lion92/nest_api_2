@@ -44,7 +44,7 @@ export class ActionService {
 
     async findCategorieSum(id)  {
         let qb=this.actionRepository.createQueryBuilder("action")
-            qb.select("sum(montant) AS montant,categorieId, color, categorie, action.userId, dateAjout")
+            qb.select("sum(montant) AS montant,categorieId, color, categorie, action.userId, dateAjout, dateTransaction")
         qb.innerJoin("action.user","user")
         qb.innerJoin("action.categorie","categorie")
         qb.where({user:id})
@@ -55,7 +55,7 @@ export class ActionService {
 
     async findByUser(id)  {
         let qb=this.actionRepository.createQueryBuilder("action")
-        qb.select("action.id as id, montant, categorie, description, user.id as user, categorie.id as categorieId, dateAjout")
+        qb.select("action.id as id, montant, categorie, description, user.id as user, categorie.id as categorieId, dateAjout, dateTransaction")
         qb.innerJoin("action.user","user")
         qb.innerJoin("action.categorie","categorie")
         qb.where({user:id})
